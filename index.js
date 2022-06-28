@@ -1,5 +1,10 @@
 const http = require('http')
 const { Client, Intents, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const client = new Client({
+  partials: ["CHANNEL"],
+  intents: new Intents(32767),
+  restTimeOffset: -1000
+});
 const prefix = ""
 const target_ch_id = "回したいch"
 const your_id = "あなたのid"
