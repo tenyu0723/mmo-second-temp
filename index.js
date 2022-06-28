@@ -59,7 +59,7 @@ client.on("messageCreate", async message => {
 });
 
 client.on("messageCreate", async message => {
-  if(message.author.id != your_id){
+  if(message.author.id != your_id || !message.content.startsWith(prefix)){
     return;
   }
   const arg = message.content.slice(prefix.length).split(/ +/);
