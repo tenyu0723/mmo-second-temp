@@ -65,7 +65,7 @@ client.on("messageCreate", async message => {
   const arg = message.content.slice(prefix.length).split(/ +/);
   const command = arg.shift().toLowerCase();
   if(command == "say"){
-    const msg = message.content.slice(Number(prefix.length)+4).split();
+    const msg = message.content.slice(Number(prefix.length)+4).trim();
     message.channel.send(msg)
   }
 });
