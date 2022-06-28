@@ -1,7 +1,8 @@
 const http = require('http')
 const { Client, Intents, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const prefix = "m/"
+const prefix = ""
 const target_ch_id = "回したいch"
+const your_id = "あなたのid"
 
 http
   .createServer(function(request, response) {
@@ -16,7 +17,7 @@ if (process.env.DISCORD_BOT_TOKEN == undefined) {
 }
 
 client.on('ready', async () => {
-  const you = client.users.cache.get("あなたのID")
+  const you = client.users.cache.get(your_id)
     client.user.setActivity(`${client.user.username} | prefix=${prefix} | 製作者:${you.tag} | ${client.guilds.cache.size}servers | ${client.users.cache.size}members`, {
       type: 'PLAYING'
     });
@@ -25,7 +26,7 @@ client.on('ready', async () => {
   client.channels.cache.get(target_ch_id).send("!!atk")
 });
 
-client.on("messageCreate", message => {
+client.on("messageCreate", async message => {
   const embed = message.embeds[0]
   if(message.author.id != "980429469875580939" || !embed || message.channel.id != target_ch_id){
     return;
@@ -33,22 +34,34 @@ client.on("messageCreate", message => {
   if(embed.title && embed.title.match(/が待ち構えている...！/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },600)
+    },750)
   }
   if(embed.description && embed.description.match(/のHP/) && !embed.description.match(/はやられてしまった。。。/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },600)
+    },750)
   }
   if(embed.description && embed.description.match(/はやられてしまった。。。/)){
     setTimeout(() => {
       message.channel.send("!!i e")
-    },600)
+    },750)
   }
   if(embed.description && embed.description.match(/はエリクサーを使った/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },600)
+    },750)
+  }
+});
+
+client.on("messageCreate", async message => {
+  if(message.author.id != your_id){
+    return;
+  }
+  const arg = message.content.slice(prefix.length).split(/ +/);
+  const command = arg.shift().toLowerCase();
+  if(command == "say"){
+    const msg = message.content.slice(Number(prefix.length)+4).split();
+    message.channel.send(msg)
   }
 });
 
