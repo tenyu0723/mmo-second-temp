@@ -39,22 +39,22 @@ client.on("messageCreate", async message => {
   if(embed.title && embed.title.match(/が待ち構えている...！/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },750)
+    },900)
   }
   if(embed.description && embed.description.match(/のHP/) && !embed.description.match(/はやられてしまった。。。/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },750)
+    },900)
   }
   if(embed.description && embed.description.match(/はやられてしまった。。。/)){
     setTimeout(() => {
       message.channel.send("!!i e")
-    },750)
+    },900)
   }
   if(embed.description && embed.description.match(/はエリクサーを使った/)){
     setTimeout(() => {
       message.channel.send("!!atk")
-    },750)
+    },900)
   }
 });
 
